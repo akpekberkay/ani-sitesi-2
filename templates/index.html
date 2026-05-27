@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sevgi&Berkay</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:0;
+    background:linear-gradient(135deg,#1e1e2f,#2b2b45);
+    font-family:Arial;
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:40px;
+}
+
+header h1{
+    font-size:55px;
+    color:#ff77aa;
+}
+
+header p{
+    color:#ddd;
+    font-size:20px;
+}
+
+.form-alani{
+    background:#ffffff10;
+    width:80%;
+    margin:auto;
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+}
+
+input, textarea{
+    width:90%;
+    padding:15px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    border-radius:12px;
+    background:#ff77aa;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#ff4d88;
+}
+
+.galeri{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:40px;
+}
+
+.kart{
+    background:#ffffff10;
+    width:300px;
+    margin:20px;
+    border-radius:20px;
+    overflow:hidden;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.kart img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+.icerik{
+    padding:20px;
+}
+
+.tarih{
+    color:#ffb3cc;
+    margin-top:10px;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+    <h1>💖 Anılarımız 💖</h1>
+
+    <p>Seninle Geçirdiğim Her An Çok Güzel...
+        
+    </p>
+
+</header>
+
+<div class="form-alani">
+
+<form method="POST" enctype="multipart/form-data">
+
+    <input type="file" name="foto" required>
+
+    <br>
+
+    <textarea
+        name="not"
+        placeholder="Burdaki Hislerinden Bahset..."
+        required
+    ></textarea>
+
+    <br>
+
+    <input type="date" name="tarih" required>
+
+    <br>
+
+    <button type="submit">
+        Anıyı Kaydet
+    </button>
+
+</form>
+
+</div>
+
+<div class="galeri">
+
+{% for ani in anilar %}
+
+<div class="kart">
+
+    <img src="{{ url_for('static', filename='uploads/' + ani.foto) }}">
+
+    <div class="icerik">
+
+        <h3>{{ ani.not_yazi }}</h3>
+
+        <p class="tarih">
+            📅 {{ ani.tarih }}
+        </p>
+        <a href="/sil/{{ ani.id }}">
+
+    <button>
+        Sil
+    </button>
+
+</a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
